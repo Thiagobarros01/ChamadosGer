@@ -2,20 +2,20 @@
 using GerenciamentoDeChamados.Application.Interfaces;
 using GerenciamentoDeChamados.Domain.Entities;
 using GerenciamentoDeChamados.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace GerenciamentoDeChamados.Application.Services
 {
     public class ChamadoService : IChamadoService
     {
         private readonly IChamadoRepository _chamadoRepository;
+        
+
 
         public ChamadoService(IChamadoRepository chamadoRepository)
         {
             _chamadoRepository = chamadoRepository;
+            
         }
 
         public async Task<IEnumerable<ChamadoDto>> ObterTodosChamadosAsync()
@@ -67,27 +67,34 @@ namespace GerenciamentoDeChamados.Application.Services
         {
             try
             {
-                if (!Enum.TryParse<StatusChamado>(chamadoDto.Status, out var statusEnum))
-                {
-                    throw new ArgumentException("Status inválido.");
-                }
 
-                var chamado = new Chamado
+                var Chamado = new Chamado
                 {
+                    Id = chamadoDto.Id,
+                    Status = chamadoDto.Status,
                     Descricao = chamadoDto.Descricao,
-                    Status = statusEnum,
-                    UsuarioId = chamadoDto.UsuarioId
+                    Prioridade = chamadoDto.Prioridade,
+                    Titulo = chamadoDto.Titulo,
+                    UsuarioId = chamadoDto.UsuarioId,
                 };
 
-                chamado = await _chamadoRepository.CriarChamadoAsync(chamado);
-
+                await _chamadoRepository.CriarChamadoAsync(Chamado);
+                
+                             
                 return new ChamadoDto
                 {
-                    Id = chamado.Id,
-                    Descricao = chamado.Descricao,
-                    Status = chamado.Status.ToString(),
-                    UsuarioNome = chamado.Usuario.Nome
+                    Id = Chamado.Id,
+                    Descricao = Chamado.Descricao,
+                    Prioridade = Chamado.Prioridade,
+                    Status = chamadoDto.Status,
+                    Titulo = Chamado.Titulo,
+                    UsuarioId = Chamado.UsuarioId,
+
+
                 };
+
+
+
             }
             catch (Exception ex)
             {
@@ -104,13 +111,10 @@ namespace GerenciamentoDeChamados.Application.Services
                 if (chamado == null)
                     return null;
 
-                if (!Enum.TryParse<StatusChamado>(chamadoDto.Status, out var statusEnum))
-                {
-                    throw new ArgumentException("Status inválido.");
-                }
+             
 
                 chamado.Descricao = chamadoDto.Descricao;
-                chamado.Status = statusEnum;
+                chamado.Status = chamadoDto.Status;
                 chamado.UsuarioId = chamadoDto.UsuarioId;
 
                 chamado = await _chamadoRepository.AtualizarChamadoAsync(chamado);

@@ -9,11 +9,11 @@ namespace GerenciamentoDeChamados.Domain.Entities
 {
     public class Chamado
     {
-        public int Id { get; set; } // Alterado para int
+        public int Id { get; set; } 
         public string Titulo { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
-        public PrioridadeChamado Prioridade { get; set; } = PrioridadeChamado.Baixa;
-        public StatusChamado Status { get; set; } = StatusChamado.Aberto;
+        public string Prioridade { get; set; }
+        public string Status { get; set; } 
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
         public DateTime? DataAtualizacao { get; set; }
 
