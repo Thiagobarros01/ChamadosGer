@@ -116,14 +116,19 @@ namespace GerenciamentoDeChamados.Application.Services
                 chamado.Descricao = chamadoDto.Descricao;
                 chamado.Status = chamadoDto.Status;
                 chamado.UsuarioId = chamadoDto.UsuarioId;
+                chamado.Titulo = chamadoDto.Titulo;
+                chamado.Prioridade = chamadoDto.Prioridade;
+
 
                 chamado = await _chamadoRepository.AtualizarChamadoAsync(chamado);
 
                 return new ChamadoDto
                 {
                     Id = chamado.Id,
+                    Titulo = chamado.Titulo,
                     Descricao = chamado.Descricao,
-                    Status = chamado.Status.ToString(),
+                    Status = chamado.Status,
+                    Prioridade = chamado.Prioridade,
                     UsuarioNome = chamado.Usuario.Nome
                 };
             }
