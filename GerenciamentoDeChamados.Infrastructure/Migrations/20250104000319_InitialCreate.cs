@@ -15,7 +15,8 @@ namespace GerenciamentoDeChamados.Infrastructure.Migrations
                 name: "Usuarios",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Nome = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Senha = table.Column<string>(type: "nvarchar(max)", nullable: false),
@@ -30,14 +31,15 @@ namespace GerenciamentoDeChamados.Infrastructure.Migrations
                 name: "Chamados",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Titulo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Descricao = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Prioridade = table.Column<int>(type: "int", nullable: false),
                     Status = table.Column<int>(type: "int", nullable: false),
                     DataCriacao = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DataAtualizacao = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UsuarioId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    UsuarioId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -54,11 +56,12 @@ namespace GerenciamentoDeChamados.Infrastructure.Migrations
                 name: "Anexos",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     NomeArquivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CaminhoArquivo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     DataUpload = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ChamadoId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
+                    ChamadoId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {

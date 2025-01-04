@@ -8,9 +8,9 @@ namespace GerenciamentoDeChamados.Application.DTOs
 {
     public class UsuarioDto
     {
-        public Guid Id { get; set; }
+        public int Id { get; set; }  // Alterado para int
         public string Nome { get; set; }
         public string Email { get; set; }
-        public string Senha { get; set; }  
+        public string Senha { get; set; }
     }
 }

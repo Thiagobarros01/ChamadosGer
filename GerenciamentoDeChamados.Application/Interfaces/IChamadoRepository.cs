@@ -10,6 +10,9 @@ namespace GerenciamentoDeChamados.Application.Interfaces
     public interface IChamadoRepository
     {
         Task<IEnumerable<Chamado>> ObterChamadosAsync();
+        Task<Chamado> ObterChamadoPorIdAsync(int id);
         Task<Chamado> CriarChamadoAsync(Chamado chamado);
+        Task<Chamado> AtualizarChamadoAsync(Chamado chamado);
+        Task<bool> DeletarChamadoAsync(int id);  // Método com ID
     }
 }

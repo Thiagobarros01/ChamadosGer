@@ -9,22 +9,22 @@ namespace GerenciamentoDeChamados.Domain.Entities
 {
     public class Chamado
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; } // Alterado para int
         public string Titulo { get; set; } = string.Empty;
         public string Descricao { get; set; } = string.Empty;
-        public PrioridadeChamado Prioridade { get; set; } = PrioridadeChamado.Media;
+        public PrioridadeChamado Prioridade { get; set; } = PrioridadeChamado.Baixa;
         public StatusChamado Status { get; set; } = StatusChamado.Aberto;
         public DateTime DataCriacao { get; set; } = DateTime.UtcNow;
         public DateTime? DataAtualizacao { get; set; }
 
         // Relacionamento com Usuário
-        public Guid UsuarioId { get; set; }
+        public int UsuarioId { get; set; } // Alterado para int
         public Usuario Usuario { get; set; }
 
         // Relacionamento com Anexos
         public ICollection<Anexo> Anexos { get; set; } = new List<Anexo>();
     }
 
-   
+
 }
 

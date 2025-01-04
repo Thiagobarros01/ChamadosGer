@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GerenciamentoDeChamados.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250103015323_InitialCreate")]
+    [Migration("20250104000319_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -27,16 +27,18 @@ namespace GerenciamentoDeChamados.Infrastructure.Migrations
 
             modelBuilder.Entity("GerenciamentoDeChamados.Domain.Entities.Anexo", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("CaminhoArquivo")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("ChamadoId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("ChamadoId")
+                        .HasColumnType("int");
 
                     b.Property<DateTime>("DataUpload")
                         .HasColumnType("datetime2");
@@ -54,9 +56,11 @@ namespace GerenciamentoDeChamados.Infrastructure.Migrations
 
             modelBuilder.Entity("GerenciamentoDeChamados.Domain.Entities.Chamado", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime?>("DataAtualizacao")
                         .HasColumnType("datetime2");
@@ -78,8 +82,8 @@ namespace GerenciamentoDeChamados.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("UsuarioId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<int>("UsuarioId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -90,9 +94,11 @@ namespace GerenciamentoDeChamados.Infrastructure.Migrations
 
             modelBuilder.Entity("GerenciamentoDeChamados.Domain.Entities.Usuario", b =>
                 {
-                    b.Property<Guid>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("DataCriacao")
                         .HasColumnType("datetime2");

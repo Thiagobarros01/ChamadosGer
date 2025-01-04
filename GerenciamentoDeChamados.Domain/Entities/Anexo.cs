@@ -8,14 +8,13 @@ namespace GerenciamentoDeChamados.Domain.Entities
 {
     public class Anexo
     {
-        public Guid Id { get; set; } = Guid.NewGuid();
+        public int Id { get; set; } // Alterado para int
         public string NomeArquivo { get; set; } = string.Empty;
         public string CaminhoArquivo { get; set; } = string.Empty;
         public DateTime DataUpload { get; set; } = DateTime.UtcNow;
 
         // Relacionamento com Chamado
-        public Guid ChamadoId { get; set; }
+        public int ChamadoId { get; set; } // Alterado para int
         public Chamado Chamado { get; set; }
-
     }
 }

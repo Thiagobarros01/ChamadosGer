@@ -17,17 +17,49 @@ namespace GerenciamentoDeChamados.Presentation.Controllers
         }
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<ChamadoDto>>> GetChamados()
+        public async Task<ActionResult> GetChamados()
         {
-            var chamados = await _chamadoService.ObterChamadosAsync();
+            var chamados = await _chamadoService.ObterTodosChamadosAsync();
             return Ok(chamados);
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult> GetChamado(int id)
+        {
+            var chamado = await _chamadoService.ObterChamadoPorIdAsync(id);
+            if (chamado == null)
+                return NotFound();
+            return Ok(chamado);
+        }
+
         [HttpPost]
-        public async Task<ActionResult> PostChamado(ChamadoDto chamadoDto)
+        public async Task<ActionResult> CreateChamado([FromBody] ChamadoDto chamadoDto)
         {
             var chamado = await _chamadoService.CriarChamadoAsync(chamadoDto);
-            return CreatedAtAction(nameof(GetChamados), new { id = chamado.Id }, chamado);
+            return CreatedAtAction(nameof(GetChamado), new { id = chamado.Id }, chamado);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult> UpdateChamado(int id, [FromBody] ChamadoDto chamadoDto)
+        {
+            if (id != chamadoDto.Id)
+                return BadRequest();
+
+            var chamadoAtualizado = await _chamadoService.AtualizarChamadoAsync(id, chamadoDto);
+            if (chamadoAtualizado == null)
+                return NotFound();
+
+            return Ok(chamadoAtualizado);
+        }
+
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteChamado(int id)
+        {
+            var sucesso = await _chamadoService.DeletarChamadoAsync(id);
+            if (!sucesso)
+                return NotFound();
+
+            return NoContent();
         }
     }
 }

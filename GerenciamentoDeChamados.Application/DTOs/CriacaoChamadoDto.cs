@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace GerenciamentoDeChamados.Application.DTOs
 {
-    public class ChamadoDto
+    class CriacaoChamadoDto
     {
-        public int Id { get; set; } // Alterado para int
+        public string Titulo { get; set; }
         public string Descricao { get; set; }
-        public string Status { get; set; } 
+        public PrioridadeChamado Prioridade { get; set; }
         public string UsuarioNome { get; set; }
         public int UsuarioId { get; set; } // Alterado para int
     }

@@ -9,7 +9,10 @@ namespace GerenciamentoDeChamados.Application.Interfaces
 {
     public interface IChamadoService
     {
-        Task<IEnumerable<ChamadoDto>> ObterChamadosAsync();
+        Task<IEnumerable<ChamadoDto>> ObterTodosChamadosAsync();
+        Task<ChamadoDto> ObterChamadoPorIdAsync(int id);
         Task<ChamadoDto> CriarChamadoAsync(ChamadoDto chamadoDto);
+        Task<ChamadoDto> AtualizarChamadoAsync(int id, ChamadoDto chamadoDto);
+        Task<bool> DeletarChamadoAsync(int id);
     }
 }
